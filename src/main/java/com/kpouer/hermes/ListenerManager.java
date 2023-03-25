@@ -22,10 +22,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ListenerManager {
+/**
+ * This class is used to manage listeners.
+ * Usually you should not use it directly, but use the {@link com.kpouer.hermes.Hermes} class instead.
+ */
+class ListenerManager {
     private final Map<Class<?>, List<Target>> targets = new HashMap<>();
 
-    public void subscribe(Object listener) {
+    void subscribe(Object listener) {
         var methods = listener.getClass().getMethods();
         for (var method : methods) {
             var annotation = method.getAnnotation(Listener.class);
@@ -41,7 +45,7 @@ public class ListenerManager {
         }
     }
 
-    public void unsubscribe(Object listener) {
+    void unsubscribe(Object listener) {
         var methods = listener.getClass().getMethods();
         for (var method : methods) {
             var annotation = method.getAnnotation(Listener.class);
@@ -60,7 +64,7 @@ public class ListenerManager {
         }
     }
 
-    public void publish(Object event) {
+    void publish(Object event) {
         var eventClass = event.getClass();
         var listeners = targets.get(eventClass);
         if (listeners != null) {

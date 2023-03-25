@@ -24,11 +24,11 @@ import java.lang.reflect.Method;
 
 @RequiredArgsConstructor
 @Getter
-public class Target {
+class Target {
     private final Object listener;
     private final Method method;
 
-    public void invoke(Object event) {
+    void invoke(Object event) {
         try {
             method.invoke(listener, event);
         } catch (Exception e) {
