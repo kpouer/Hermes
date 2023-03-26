@@ -37,9 +37,12 @@ class HermesTest {
     @Test
     void publishInBackground() throws InterruptedException {
         hermes.subscribe(receiver);
-        hermes.publishInBackground(event);
+
+        synchronized (receiver) {
+            hermes.publishInBackground(event);
+            receiver.wait(100L);
+        }
         // wait for the message to be received
-        Thread.sleep(100L);
         assertEquals("Hello", receiver.getReceivedMessage(), "The message should be received");
         assertNotSame(Thread.currentThread(), receiver.getReceivedThread(), "The message should be received in a different thread");
     }
@@ -52,6 +55,9 @@ class HermesTest {
         public void onEvent(Event event) {
             receivedMessage = event.getMessage();
             receivedThread = Thread.currentThread();
+            synchronized (this) {
+                notifyAll();
+            }
         }
     }
 
