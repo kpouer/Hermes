@@ -1,4 +1,7 @@
 # Hermes
+![CodeQL](https://github.com/kpouer/Hermes/workflows/CodeQL/badge.svg)
+[![Maven Central](https://img.shields.io/maven-central/v/com.kpouer/hermes)](https://central.sonatype.com/artifact/com.kpouer/hermes/1.0.0/versions)
+
 
 Hermes is a light Event Bus library.
 Written for fun, it is similar to what you can find in bigger libaries like [Google Guava](https://github.com/google/guava), 
