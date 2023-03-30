@@ -19,7 +19,7 @@ Available through Maven central
 </dependency>
 ```
 
-### Maven
+### Example
 
 ```java
 public class Test {
